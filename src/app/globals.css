@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .home-screen-button {
+    @apply h-28 w-28  mt-10 mb-10 text-black text-xl hover:bg-purple-500 bg-purple-300  flex justify-center rounded-xl hover:rounded-2xl hover:h-36 hover:w-36 items-center transition-all duration-300 shadow-xl hover:shadow-2xl
+}
+}

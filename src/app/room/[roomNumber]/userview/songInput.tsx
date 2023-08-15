@@ -3,6 +3,16 @@
 
 import { useState, FormEvent, useEffect } from "react"
 import Suggestions from "./suggestions";
+import { collection, addDoc } from "firebase/firestore"; 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import firebaseCredentials from "../../../credentials/firebaseCredentials.json"
+import { UserViewParams } from "./page";
+
+const firebaseConfig = firebaseCredentials
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 
 export interface returnedSongObject {
@@ -12,10 +22,13 @@ export interface returnedSongObject {
         trackName: string;
         artworkUrl60: string;
 }
+interface Props {
+    roomNumber: string
+}
 
 
 
-export default function SongInput() {
+export default function SongInput(props: Props) {
     const [songInputVal, setSongInputVal] = useState("")
     const[dropdownSuggestions, setDropdownSuggestions] = useState<returnedSongObject[]>([])
     useEffect(() => {
@@ -43,9 +56,18 @@ export default function SongInput() {
         fetchMusicData();
       }, [songInputVal]);
 
-    const handleAddSongToList = (songToAddToList: returnedSongObject) => {
+    const handleAddSongToList = async (songToAddToList: returnedSongObject) => {
         console.log(" I will add this song to the list")
         console.log(songToAddToList)
+
+
+        try {
+            const docRef = await addDoc(collection(db, props.roomNumber), songToAddToList);
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+  
     }
 
     const onChangeInputVal = (event: any) => {

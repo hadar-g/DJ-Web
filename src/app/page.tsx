@@ -15,7 +15,7 @@ export default function Home() {
 
       <div className="flex justify-center">
       <Link className = "home-screen-button mr-10 ml-auto" href="/user">User</Link>
-     <Link className = "home-screen-button ml-10 mr-auto" href="/dj">DJ</Link>
+     <Link className = "home-screen-button ml-10 mr-auto" href="/artist">Artist</Link>
       </div>
 
      </div>

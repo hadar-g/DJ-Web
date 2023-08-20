@@ -11,13 +11,13 @@ export default function DJ() {
         setCreated(true)
     }
     const handleGoToRoom = () => {
-        push(`/room/1234/djview`);
+        push(`/room/1234/artistview`);
     }
 
     return (
       <main className="flex min-h-screen flex-col items-center  p-24">
        <div>
-         DJ Page
+         Artist Page
       </div>
       <button type = "button" className="home-screen-button text-sm" onClick={handleOnClick}>Create New Room</button>
 

@@ -59,8 +59,7 @@ export default function SongInput(props: Props) {
     const handleAddSongToList = async (songToAddToList: returnedSongObject) => {
         console.log(" I will add this song to the list")
         console.log(songToAddToList)
-
-
+        setSongInputVal('');
         try {
             const docRef = await addDoc(collection(db, props.roomNumber), songToAddToList);
             console.log("Document written with ID: ", docRef.id);
@@ -74,14 +73,13 @@ export default function SongInput(props: Props) {
         setSongInputVal(event?.target?.value)
     }
     return (
-      <div>
-        song input
+      <main className="flex justify-center">
         <form>
         <input
             type="text"
             value={songInputVal}
             onChange={onChangeInputVal}
-            className="p-2 border border-gray-300 rounded text-black mt-5"
+            className="p-2 border border-gray-300 rounded text-black mb-10 my-{-100px}"
             placeholder="Enter Song Name..."
           />
         </form>
@@ -90,6 +88,6 @@ export default function SongInput(props: Props) {
             suggestions ={dropdownSuggestions}
             onSongSelected = {handleAddSongToList}/>
 
-      </div>
+      </main>
     )
   }

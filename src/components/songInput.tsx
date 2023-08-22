@@ -6,8 +6,8 @@ import Suggestions from "./suggestions";
 import { collection, addDoc } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import firebaseCredentials from "../../../credentials/firebaseCredentials.json"
-import { UserViewParams } from "./page";
+import firebaseCredentials from "../credentials/firebaseCredentials.json"
+import { UserViewParams } from "../app/room/[roomNumber]/userview/page";
 
 const firebaseConfig = firebaseCredentials
 

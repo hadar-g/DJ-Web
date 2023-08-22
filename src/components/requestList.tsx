@@ -6,7 +6,7 @@ import firebaseCredentials from "../credentials/firebaseCredentials.json"
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { returnedSongObject } from "@/types/songObject";
-import RequestListItem from "@/app/components/requestListItem";
+import RequestListItem from "@/components/requestListItem";
 
 const firebaseConfig = firebaseCredentials
 

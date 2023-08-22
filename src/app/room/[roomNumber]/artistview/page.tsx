@@ -1,4 +1,4 @@
-import RequestList from "@/app/components/requestList"
+import RequestList from "@/components/requestList"
 
 export interface UserViewParams {
   params:{

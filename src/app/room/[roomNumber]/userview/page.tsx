@@ -1,6 +1,6 @@
 
-import SongInput from "./songInput"
-import RequestList from "../../../components/requestList"
+import SongInput from "../../../../components/songInput"
+import RequestList from "../../../../components/requestList"
 
 
 export interface UserViewParams {

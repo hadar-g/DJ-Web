@@ -2,7 +2,7 @@
 "use client"
 
 import { get } from "http"
-import { returnedSongObject } from "./songInput"
+import { returnedSongObject } from "@/types/songObject"
 import Image from 'next/image'
 import { useEffect, useState } from "react"
 

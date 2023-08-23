@@ -9,7 +9,7 @@ export default  function User() {
   
     const handleSubmit = (event: FormEvent) => {
       event.preventDefault();
-      push(`/room/${value}/userview`);
+      push(`/room/${value}/guestview`);
     };
       return (
         <main className="flex min-h-screen flex-col items-center pt-8">

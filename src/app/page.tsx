@@ -14,8 +14,8 @@ export default function Home() {
       <p className="px-5 text-xl pb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus erat justo, egestas facilisis erat bibendum nec. Praesent quis malesuada purus. Fusce fermentum justo in nisi porttitor, ac lacinia ipsum tincidunt. Fusce mattis, enim ut pretium varius, magna urna consectetur purus, ut facilisis enim nulla vitae leo. Phasellus elit libero, iaculis a pellentesque et, molestie eu mi. Morbi scelerisque libero sed nulla consequat, eget placerat risus sodales. Vestibulum maximus suscipit dolor eu tristique. Phasellus quis orci pretium, cursus massa at, imperdiet est. Suspendisse scelerisque vestibulum mi, sit amet mollis felis scelerisque id. Duis a suscipit turpis. Vivamus non mi et tellus convallis ullamcorper nec eu eros</p>
 
       <div className="flex justify-center">
-      <Link className = "home-screen-button mr-10 ml-auto" href="/user">User</Link>
-     <Link className = "home-screen-button ml-10 mr-auto" href="/artist">Artist</Link>
+      <Link className = "home-screen-button mr-10 ml-auto" href="/guestPage">Guest</Link>
+     <Link className = "home-screen-button ml-10 mr-auto" href="/artistPage">Artist</Link>
       </div>
 
      </div>

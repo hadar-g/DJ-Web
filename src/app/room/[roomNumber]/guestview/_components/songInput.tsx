@@ -6,29 +6,16 @@ import Suggestions from "./suggestions";
 import { collection, addDoc } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import firebaseCredentials from "../credentials/firebaseCredentials.json"
-import { UserViewParams } from "../app/room/[roomNumber]/userview/page";
+import firebaseCredentials from "../../../../../credentials/firebaseCredentials.json"
+import { GuestViewParams } from "../_types/GuestViewParams";
+import { returnedSongObject } from "@/types/songObject";
 
 const firebaseConfig = firebaseCredentials
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-export interface returnedSongObject {
-
-        artistName : string;
-        artworkUrl100 : string;
-        trackName: string;
-        artworkUrl60: string;
-}
-interface Props {
-    roomNumber: string
-}
-
-
-
-export default function SongInput(props: Props) {
+export default function SongInput(props:{roomNumber: string}) {
     const [songInputVal, setSongInputVal] = useState("")
     const[dropdownSuggestions, setDropdownSuggestions] = useState<returnedSongObject[]>([])
     useEffect(() => {

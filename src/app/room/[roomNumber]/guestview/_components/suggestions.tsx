@@ -1,4 +1,4 @@
-import { returnedSongObject } from "./songInput"
+import { returnedSongObject } from "@/types/songObject";
 import SuggestionListItem from "./suggestionListItem"
 
 interface Props {

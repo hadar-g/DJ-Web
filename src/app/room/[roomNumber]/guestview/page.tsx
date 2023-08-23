@@ -1,15 +1,9 @@
 
-import SongInput from "../../../../components/songInput"
-import RequestList from "../../../../components/requestList"
+import SongInput from "./_components/songInput"
+import RequestList from "@/components/requestList"
+import { GuestViewParams } from "./_types/GuestViewParams"
 
-
-export interface UserViewParams {
-  params:{
-    roomNumber: string
-  }
-}
-
-export default function userRoom({params}: UserViewParams) {
+export default function guestRoom({params}: GuestViewParams) {
     return (
       <main className="flex min-h-screen flex-col items-center p-24 justify-center">
         <div> user view</div>

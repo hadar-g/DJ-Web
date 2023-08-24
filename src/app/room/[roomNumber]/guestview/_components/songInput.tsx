@@ -9,6 +9,7 @@ import { getFirestore } from "firebase/firestore";
 import firebaseCredentials from "../../../../../credentials/firebaseCredentials.json"
 import { GuestViewParams } from "../_types/GuestViewParams";
 import { returnedSongObject } from "@/types/songObject";
+import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig = firebaseCredentials
 
@@ -47,8 +48,14 @@ export default function SongInput(props:{roomNumber: string}) {
         console.log(" I will add this song to the list")
         console.log(songToAddToList)
         setSongInputVal('');
+        const songToAddWithMoreValues = {
+          ...songToAddToList,
+          id: uuidv4(),
+          votes: 10,
+          willPlay: null
+        }
         try {
-            const docRef = await addDoc(collection(db, props.roomNumber), songToAddToList);
+            const docRef = await addDoc(collection(db, props.roomNumber), songToAddWithMoreValues);
             console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);

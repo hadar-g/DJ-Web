@@ -3,10 +3,10 @@
 
 import { useState, FormEvent, useEffect } from "react"
 import Suggestions from "./suggestions";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import firebaseCredentials from "../../../../../credentials/firebaseCredentials.json"
+import firebaseCredentials from "@/credentials/firebaseCredentials.json"
 import { GuestViewParams } from "../_types/GuestViewParams";
 import { returnedSongObject } from "@/types/songObject";
 import { v4 as uuidv4 } from 'uuid';
@@ -52,11 +52,14 @@ export default function SongInput(props:{roomNumber: string}) {
           ...songToAddToList,
           id: uuidv4(),
           votes: 10,
-          willPlay: null
+          willPlay: null,
+          createdAt: new Date().toISOString(),
+          epoch: Date.now()
         }
         try {
-            const docRef = await addDoc(collection(db, props.roomNumber), songToAddWithMoreValues);
-            console.log("Document written with ID: ", docRef.id);
+            //const docRef = await addDoc(collection(db, props.roomNumber), songToAddWithMoreValues);
+            await setDoc(doc(db, props.roomNumber, songToAddWithMoreValues.id), songToAddWithMoreValues)
+            // console.log("Document written with ID: ", docRef.id);
         } catch (e) {
             console.error("Error adding document: ", e);
         }

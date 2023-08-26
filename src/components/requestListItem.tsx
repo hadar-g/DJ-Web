@@ -2,7 +2,7 @@
 "use client"
 
 import { requestListSongObject } from "@/types/songObject"
-import { collection, addDoc } from "firebase/firestore"; 
+import { setDoc, doc } from "firebase/firestore"; 
 import { useParams } from "next/navigation";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -14,13 +14,15 @@ interface Props  {
     onClickDown: () => void;
     userType: string;
 }
-const app = initializeApp(firebaseCredentials);
-const db = getFirestore(app);
 
+const firebaseConfig = firebaseCredentials
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export default function RequestListItem(props: Props) {
 
-    const params = useParams()
+
+    const params = useParams() as {roomNumber: string}
     // const handleChangeVoteCount = async () => {
 
     //     console.log(params)
@@ -35,6 +37,15 @@ export default function RequestListItem(props: Props) {
     //         console.error("Error adding document: ", e);
     //     }
     // }
+    const handleOnClickDown = async () => {
+        console.log(params.roomNumber)
+        console.log(props.request.id)
+        try{
+            await setDoc(doc(db, params.roomNumber, props.request.id), {...props.request, votes: props.request.votes - 1})
+        }catch(e){
+            console.log(e)
+        }
+    }
 
 
     return (
@@ -47,7 +58,7 @@ export default function RequestListItem(props: Props) {
             <div className=" font-bold ml-10  flex flex-col justify-center ">{props.request.votes}</div>
             <div className="ml-10 flex flex-row w-10 justify-between ">
                 <button onClick={() => console.log('up')}>U</button>
-                <button onClick={props.onClickDown}>D</button>
+                <button onClick={handleOnClickDown}>D</button>
             </div>
         </div>
     )

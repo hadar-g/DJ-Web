@@ -28,14 +28,35 @@ export default function RequestList(props: {roomNumber: string}) {
     //     });
     // }
 
+
+            const compareFunction = (songA: requestListSongObject, songB: requestListSongObject) =>{
+                if(songA.votes === songB.votes){
+                    return  songA.epoch - songB.epoch
+                }
+                return songB.votes - songA.votes
+            }
  
             const collectionQuery =  query(collection(db, props.roomNumber));
+           
             onSnapshot(collectionQuery, (querySnapshot) => {
                 console.log("subscribed")
-                querySnapshot.forEach((doc) => {
-                    setSongRequests((songRequests) => [...songRequests, (doc.data() as requestListSongObject)])
+
+                const tempUnsortedReturnedSongs : requestListSongObject[] = []
+                
+                 querySnapshot.forEach((doc) => {
                     console.log(doc.data())
-                });
+                     tempUnsortedReturnedSongs.push(doc.data() as requestListSongObject)
+                // setSongRequests((songRequests) => [...songRequests, (doc.data() as requestListSongObject)])
+                // console.log(doc.data())
+                 });
+                 console.log(tempUnsortedReturnedSongs)
+                // tempUnsortedReturnedSongs.sort((doc1: requestListSongObject, doc2: requestListSongObject) => doc1.epoch - doc2.epoch)
+                //tempUnsortedReturnedSongs.sort(function(songA, songB){return songA.epoch - songB.epoch})
+                tempUnsortedReturnedSongs.sort((songA, songB) => compareFunction(songA, songB))
+                 //function(songA, songB){return songA.epoch - songB.epoch}
+                 console.log("sorted: " , tempUnsortedReturnedSongs)
+                 setSongRequests(tempUnsortedReturnedSongs);
+
               });
         }, [])
 

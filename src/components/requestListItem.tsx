@@ -38,10 +38,15 @@ export default function RequestListItem(props: Props) {
     //     }
     // }
     const handleOnClickDown = async () => {
-        console.log(params.roomNumber)
-        console.log(props.request.id)
         try{
             await setDoc(doc(db, params.roomNumber, props.request.id), {...props.request, votes: props.request.votes - 1})
+        }catch(e){
+            console.log(e)
+        }
+    }
+    const handleOnClickUp = async () => {
+        try{
+            await setDoc(doc(db, params.roomNumber, props.request.id), {...props.request, votes: props.request.votes + 1})
         }catch(e){
             console.log(e)
         }
@@ -57,7 +62,7 @@ export default function RequestListItem(props: Props) {
         </div>
             <div className=" font-bold ml-10  flex flex-col justify-center ">{props.request.votes}</div>
             <div className="ml-10 flex flex-row w-10 justify-between ">
-                <button onClick={() => console.log('up')}>U</button>
+                <button onClick={handleOnClickUp}>U</button>
                 <button onClick={handleOnClickDown}>D</button>
             </div>
         </div>

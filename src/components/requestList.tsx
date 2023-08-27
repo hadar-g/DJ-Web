@@ -12,7 +12,13 @@ import { unsubscribe } from "diagnostics_channel";
 const app = initializeApp(firebaseCredentials);
 const db = getFirestore(app);
 
-export default function RequestList(props: {roomNumber: string}) {
+interface Props  {
+    roomNumber: string
+    userType: string;
+}
+
+
+export default function RequestList(props: Props) {
 
     const [songRequests, setSongRequests] = useState<requestListSongObject[]>([])
 
@@ -28,13 +34,22 @@ export default function RequestList(props: {roomNumber: string}) {
     //     });
     // }
 
-
             const compareFunction = (songA: requestListSongObject, songB: requestListSongObject) =>{
                 if(songA.votes === songB.votes){
                     return  songA.epoch - songB.epoch
                 }
-                return songB.votes - songA.votes
+                    return songB.votes - songA.votes
+                
             }
+                    
+            const sortArrayByColor = (arrayToSort: requestListSongObject[]) => {
+                const greens = arrayToSort.filter(obj => obj.willPlay === true).sort((songA, songB) => compareFunction(songA, songB))
+                const reds = arrayToSort.filter(obj => obj.willPlay === false).sort((songA, songB) => compareFunction(songA, songB))
+                const grays = arrayToSort.filter(obj => obj.willPlay === null).sort((songA, songB) => compareFunction(songA, songB))
+
+                return grays.concat(greens).concat(reds)
+                
+        }
  
             const collectionQuery =  query(collection(db, props.roomNumber));
            
@@ -52,10 +67,11 @@ export default function RequestList(props: {roomNumber: string}) {
                  console.log(tempUnsortedReturnedSongs)
                 // tempUnsortedReturnedSongs.sort((doc1: requestListSongObject, doc2: requestListSongObject) => doc1.epoch - doc2.epoch)
                 //tempUnsortedReturnedSongs.sort(function(songA, songB){return songA.epoch - songB.epoch})
-                tempUnsortedReturnedSongs.sort((songA, songB) => compareFunction(songA, songB))
+               /// tempUnsortedReturnedSongs.sort((songA, songB) => compareFunction(songA, songB))
                  //function(songA, songB){return songA.epoch - songB.epoch}
                  console.log("sorted: " , tempUnsortedReturnedSongs)
-                 setSongRequests(tempUnsortedReturnedSongs);
+                 
+                 setSongRequests(sortArrayByColor(tempUnsortedReturnedSongs));
 
               });
         }, [])
@@ -75,7 +91,7 @@ export default function RequestList(props: {roomNumber: string}) {
             <li key={request.id} className="flex flex-row">
                 <RequestListItem 
                     request={request}
-                    userType="user"
+                    userType={props.userType}
                     onClickUp={handleOnClickUp}
                     onClickDown={handleOnClickDown}
                 />

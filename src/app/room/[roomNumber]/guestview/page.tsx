@@ -11,7 +11,9 @@ export default function guestRoom({params}: GuestViewParams) {
        <div >
         <SongInput roomNumber={params.roomNumber}/>
         <div className="w-screen">
-        <RequestList roomNumber={params.roomNumber} />
+        <RequestList 
+            roomNumber={params.roomNumber}
+            userType="guest" />
         </div>
        
        </div>

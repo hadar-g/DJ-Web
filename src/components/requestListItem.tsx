@@ -23,6 +23,7 @@ export default function RequestListItem(props: Props) {
 
 
     const params = useParams() as {roomNumber: string}
+
     // const handleChangeVoteCount = async () => {
 
     //     console.log(params)
@@ -51,20 +52,52 @@ export default function RequestListItem(props: Props) {
             console.log(e)
         }
     }
+    const handleWillPlay = async () => {
+        try{
+            await setDoc(doc(db, params.roomNumber, props.request.id), {...props.request, willPlay: true})
+        }catch(e){
+            console.log(e)
+        }
+    }
+    const handleWontPlay = async () => {
+        try{
+            await setDoc(doc(db, params.roomNumber, props.request.id), {...props.request, willPlay: false})
+        }catch(e){
+            console.log(e)
+        }
+    }
+    const whatColorToRender = () => {
+        if(props.request.willPlay === false){
+            return "red"
+        }else if(props.request.willPlay === true){
+            return "green"
+        }
+        return "gray"
+    }
 
 
     return (
-        <div className="bg-gray-300 h-18 m-2 flex flex-row w-full" >
+        <div className="bg-gray-300 h-18 m-2 flex flex-row w-full"
+        style={{backgroundColor: whatColorToRender()}}>
             <img src={props.request.artworkUrl60} className="mx-4" />
             <div className="flex flex-col justify-between mt-2">
                 <div className="text-lg font-semibold text-ellipsis overflow-hidden">{props.request.trackName}</div>
                 <div className="text-xs">{props.request.artistName}</div>
         </div>
             <div className=" font-bold ml-10  flex flex-col justify-center ">{props.request.votes}</div>
-            <div className="ml-10 flex flex-row w-10 justify-between ">
-                <button onClick={handleOnClickUp}>U</button>
-                <button onClick={handleOnClickDown}>D</button>
-            </div>
+            
+                {props.userType === "guest" ? 
+                    <div className="ml-10 flex flex-row w-10 justify-between ">
+                        <button onClick={handleOnClickUp}>U</button>
+                        <button onClick={handleOnClickDown}>D</button>
+                    </div>:
+                    <div className="ml-10 flex flex-row w-10 justify-between ">
+                        <button onClick={handleWillPlay}>P</button>
+                        <button onClick={handleWontPlay}>N</button>
+                    </div>
+                 }
+
+          
         </div>
     )
   }

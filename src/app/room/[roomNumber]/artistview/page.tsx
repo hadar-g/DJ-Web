@@ -12,7 +12,9 @@ export default function DjRoom({params}: UserViewParams) {
         <div> Artist view</div>
        <div>Welcome to room {params.roomNumber} </div>
       <div className="w-screen">
-      <RequestList  roomNumber={params.roomNumber}/>
+      <RequestList  
+          roomNumber={params.roomNumber} 
+          userType="artist"/>
       </div>
       
       </main>

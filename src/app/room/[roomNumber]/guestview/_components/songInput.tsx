@@ -76,7 +76,7 @@ export default function SongInput(props:{roomNumber: string}) {
             type="text"
             value={songInputVal}
             onChange={onChangeInputVal}
-            className="p-2 border border-gray-300 rounded text-black mb-10 my-{-100px}"
+            className="p-2 border border-gray-300 rounded text-black mb-10 "
             placeholder="Enter Song Name..."
           />
         </form>

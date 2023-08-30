@@ -13,5 +13,6 @@ export interface requestListSongObject {
         id: string;
         votes: number;
         willPlay: boolean;
-        createdAt: string
+        createdAt: string;
+        epoch: number
 }

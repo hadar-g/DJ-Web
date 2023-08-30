@@ -12,7 +12,7 @@ export default function Suggestions(props: Props) {
        props.onSongSelected(selected)
     }
     return (
-     <div className="fixed flex justify-center flex-col mt-10 ">
+     <div className="fixed flex flex-col mt-10 bg-white ">
         {props.suggestions.map((suggestion: returnedSongObject) => {
         return(<SuggestionListItem 
                     suggestion ={suggestion} 

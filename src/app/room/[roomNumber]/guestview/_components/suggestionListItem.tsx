@@ -19,7 +19,7 @@ export default function SuggestionListItem(props: Props) {
     }
     return (
         <button onClick = {() => handleSongClicked(props.suggestion)}>
-        <div className="bg-gray-300 border border-black rounded-lg border-spacing-1 m-2 hover:bg-gray-500 w-80 h-16 flex flex-row" >
+        <div className="bg-gray-300 border border-black rounded-lg border-spacing-1  hover:bg-gray-500 w-80 h-16 flex flex-row" >
         <img src={props.suggestion.artworkUrl60} className="mx-4" />
         <div className="flex flex-col justify-between mt-2">
             <div className="text-lg font-semibold text-ellipsis overflow-hidden">{props.suggestion.trackName}</div>

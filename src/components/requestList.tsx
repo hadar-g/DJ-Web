@@ -70,7 +70,6 @@ export default function RequestList(props: Props) {
                /// tempUnsortedReturnedSongs.sort((songA, songB) => compareFunction(songA, songB))
                  //function(songA, songB){return songA.epoch - songB.epoch}
                  console.log("sorted: " , tempUnsortedReturnedSongs)
-                 
                  setSongRequests(sortArrayByColor(tempUnsortedReturnedSongs));
 
               });

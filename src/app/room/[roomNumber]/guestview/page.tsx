@@ -15,7 +15,6 @@ export default function guestRoom({params}: GuestViewParams) {
             roomNumber={params.roomNumber}
             userType="guest" />
         </div>
-       
        </div>
       </main>
     )

@@ -2,7 +2,7 @@
 "use client"
 
 import { useState, FormEvent, useEffect } from "react"
-import Suggestions from "./suggestions";
+import Suggestions from "./DropdownSuggestions";
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -70,19 +70,19 @@ export default function SongInput(props:{roomNumber: string}) {
         setSongInputVal(event?.target?.value)
     }
     return (
-      <main className="flex justify-center">
-        <form>
+      <main className= "flex-col flex">
+        <form className="flex justify-center ">
         <input
             type="text"
             value={songInputVal}
             onChange={onChangeInputVal}
-            className="p-2 border border-gray-300 rounded text-black mb-10 "
+            className="p-2 border border-gray-300 rounded text-black"
             placeholder="Enter Song Name..."
           />
         </form>
 
         <Suggestions 
-            suggestions ={dropdownSuggestions}
+            suggestions = {dropdownSuggestions}
             onSongSelected = {handleAddSongToList}/>
 
       </main>

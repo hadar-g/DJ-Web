@@ -5,9 +5,9 @@ import { GuestViewParams } from "./_types/GuestViewParams"
 
 export default function guestRoom({params}: GuestViewParams) {
     return (
-      <main className="flex min-h-screen flex-col items-center p-24 justify-center">
+      <div className="flex flex-col items-center p-10 justify-center mb-[100%]">
         <div> user view</div>
-       <div className=" my-10">Welcome to room {params.roomNumber} </div>
+       <div className="my-5 ">Welcome to room {params.roomNumber} </div>
        <div >
         <SongInput roomNumber={params.roomNumber}/>
         <div className="w-screen">
@@ -16,6 +16,6 @@ export default function guestRoom({params}: GuestViewParams) {
             userType="guest" />
         </div>
        </div>
-      </main>
+      </div>
     )
   }

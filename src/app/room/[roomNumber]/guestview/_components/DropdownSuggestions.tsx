@@ -1,5 +1,5 @@
 import { returnedSongObject } from "@/types/songObject";
-import SuggestionListItem from "./suggestionListItem"
+import SuggestionListItem from "./DropdownSuggestionListItem"
 
 interface Props {
     suggestions: returnedSongObject[];
@@ -12,7 +12,7 @@ export default function Suggestions(props: Props) {
        props.onSongSelected(selected)
     }
     return (
-     <div className="fixed flex flex-col mt-10 bg-white ">
+      <div className="flex flex-col justify-center ">
         {props.suggestions.map((suggestion: returnedSongObject) => {
         return(<SuggestionListItem 
                     suggestion ={suggestion} 

@@ -73,6 +73,36 @@ export default function RequestListItem(props: Props) {
         return "gray"
     }
 
+    const whatButtonToRender = () => {
+        if(props.userType === "guest" && props.request.willPlay === null){
+        return(
+        <div className="ml-10 flex flex-1 flex-row justify-center">
+            <button className="mx-1" onClick={handleOnClickUp}>
+               <Image src={upArrow} alt="up arrow" height={30} width={20} />
+           </button>
+            <button className="mx-1" onClick={handleOnClickDown}>
+               <Image src={downArrow} alt="down arrow" height={30} width={20} />
+           </button>
+       </div>
+       );
+       }else if(props.userType === "artist" && props.request.willPlay === null){
+        return(
+        <div className="ml-10 flex flex-1 flex-row justify-center ">
+            <button  className="mx-5" onClick={handleWillPlay}>
+                <Image src={play} alt="play" height={40} width={30} />
+            </button>
+            <button className="mx-5" onClick={handleWontPlay}>
+                <Image src={stop} alt="stop" height={40} width={30} />
+            </button>
+        </div>
+        )
+       }
+       return(
+        <div className="ml-10 flex flex-1 flex-row justify-center ">
+        </div>
+        )
+    }
+
 
     return (
         <div className="h-18 m-2 flex flex-row w-full"
@@ -83,8 +113,9 @@ export default function RequestListItem(props: Props) {
                 <h2 className="text-xs">{props.request.artistName}</h2>
             </div>
             <div className=" font-bold ml-10  flex flex-2 flex-col justify-center  ">{props.request.votes}</div>
-            
-                {props.userType === "guest" 
+
+            {whatButtonToRender()}           
+               {/* {props.userType === "guest" 
                 ? 
                     <div className="ml-10 flex flex-1 flex-row justify-center">
                          <button className="mx-1" onClick={handleOnClickUp}>
@@ -103,7 +134,7 @@ export default function RequestListItem(props: Props) {
                             <Image src={stop} alt="stop" height={40} width={30} />
                         </button>
                     </div>
-                 }
+                 } */}
 
           
         </div>

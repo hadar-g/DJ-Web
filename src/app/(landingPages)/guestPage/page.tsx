@@ -14,10 +14,10 @@ export default  function User() {
       return (
         <main className="flex min-h-screen flex-col items-center pt-8">
          <div className="text-3xl">
-            Welcome to the User Page
+            Get Ready to Join a Party!
         </div>
-        <div className="text-xl mt-24">
-            Enter the code for the room you want to request songs in
+        <div className="text-xl mt-10">
+            Enter the Code for the Room You Want to Join
         </div>
 
         <form onSubmit={handleSubmit} >

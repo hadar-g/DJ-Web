@@ -3,12 +3,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import firebaseCredentials from "../credentials/firebaseCredentials.json"
-import { collection, getDocs, doc, onSnapshot, query } from "firebase/firestore";
+import { collection,onSnapshot, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { requestListSongObject } from "@/types/songObject";
 import RequestListItem from "@/components/requestListItem";
-import { unsubscribe } from "diagnostics_channel";
-import { queryDb } from "@/database/queryDb";
 
 const app = initializeApp(firebaseCredentials);
 const db = getFirestore(app);
@@ -51,13 +49,6 @@ export default function RequestList(props: Props) {
                  setSongRequests(sortArrayByColor(tempUnsortedReturnedSongs));
 
               });
-        // const fetch = async () => {
-        //     console.log("fetch")
-        //     const unsortedReturnedSongs = await queryDb(props.roomNumber)
-        //     setSongRequests(sortArrayByColor(unsortedReturnedSongs));
-        // }
-        // fetch()
-
         }, [])
 
     const handleOnClickUp = () => {

@@ -2,8 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import firebaseCredentials from "../credentials/firebaseCredentials.json"
-import { collection, setDoc, doc } from "firebase/firestore"; 
-import type { requestListSongObject } from "@/types/songObject";
+import { setDoc, doc } from "firebase/firestore"; 
 
 const app = initializeApp(firebaseCredentials);
 const db = getFirestore(app);

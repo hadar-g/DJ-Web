@@ -6,7 +6,7 @@ import Suggestions from "./DropdownSuggestions";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import firebaseCredentials from "@/credentials/firebaseCredentials.json"
-import { requestListSongObject, returnedSongObject } from "@/types/songObject";
+import { returnedSongObject } from "@/types/songObject";
 import { v4 as uuidv4 } from 'uuid';
 import { updateDoc } from "@/database/updateDoc";
 

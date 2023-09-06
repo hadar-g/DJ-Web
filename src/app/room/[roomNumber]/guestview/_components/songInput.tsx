@@ -1,15 +1,14 @@
 
 "use client"
 
-import { useState, FormEvent, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Suggestions from "./DropdownSuggestions";
-import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import firebaseCredentials from "@/credentials/firebaseCredentials.json"
-import { GuestViewParams } from "../_types/GuestViewParams";
-import { returnedSongObject } from "@/types/songObject";
+import { requestListSongObject, returnedSongObject } from "@/types/songObject";
 import { v4 as uuidv4 } from 'uuid';
+import { updateDoc } from "@/database/updateDoc";
 
 const firebaseConfig = firebaseCredentials
 
@@ -26,7 +25,7 @@ export default function SongInput(props:{roomNumber: string}) {
               setDropdownSuggestions([])
               const response = await fetch(`https://itunes.apple.com/search?term=${songInputVal}&entity=song&limit=5`);
               const data = await response.json();
-            //   console.log(data)
+
               const tempArray : returnedSongObject[] = []
               data.results.map((song : returnedSongObject) => {
                  const { artistName, artworkUrl100, trackName, artworkUrl60} = song
@@ -45,8 +44,6 @@ export default function SongInput(props:{roomNumber: string}) {
       }, [songInputVal]);
 
     const handleAddSongToList = async (songToAddToList: returnedSongObject) => {
-        console.log(" I will add this song to the list")
-        console.log(songToAddToList)
         setSongInputVal('');
         const songToAddWithMoreValues = {
           ...songToAddToList,
@@ -56,14 +53,7 @@ export default function SongInput(props:{roomNumber: string}) {
           createdAt: new Date().toISOString(),
           epoch: Date.now()
         }
-        try {
-            //const docRef = await addDoc(collection(db, props.roomNumber), songToAddWithMoreValues);
-            await setDoc(doc(db, props.roomNumber, songToAddWithMoreValues.id), songToAddWithMoreValues)
-            // console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-  
+        updateDoc(props.roomNumber, songToAddWithMoreValues)
     }
 
     const onChangeInputVal = (event: any) => {

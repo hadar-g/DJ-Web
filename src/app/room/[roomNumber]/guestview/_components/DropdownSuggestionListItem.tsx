@@ -1,10 +1,7 @@
 
 "use client"
 
-import { get } from "http"
 import { returnedSongObject } from "@/types/songObject"
-import Image from 'next/image'
-import { useEffect, useState } from "react"
 
 interface Props {
         suggestion: returnedSongObject;
